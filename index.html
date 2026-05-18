@@ -1,0 +1,1197 @@
+{\rtf1\ansi\ansicpg936\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw5782\paperh8617\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
+<html lang="zh-CN">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>\uc0\u55356 \u57157  \u30058 \u33540 \u26102 \u38047  - \u19987 \u27880 \u24037 \u20316 </title>\
+    <style>\
+        :root \{\
+            --bg: #f5f0eb;\
+            --card-bg: #ffffff;\
+            --text: #3e3640;\
+            --text-secondary: #8b7f8e;\
+            --accent: #e85d4a;\
+            --accent-soft: #fde8e4;\
+            --ring-bg: #f0e8e0;\
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.07);\
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);\
+            --border: #e8e0d8;\
+            --btn-hover: #fdf0ed;\
+            --task-done: #c4b8a8;\
+            --gradient: linear-gradient(135deg, #e85d4a, #d44a3a);\
+            --timer-shadow: 0 0 60px rgba(232, 93, 74, 0.25);\
+            --mode-bg: #faf7f3;\
+        \}\
+\
+        [data-theme="dark"] \{\
+            --bg: #1a1a1e;\
+            --card-bg: #252528;\
+            --text: #e8e3e0;\
+            --text-secondary: #a09895;\
+            --accent: #f0715c;\
+            --accent-soft: #3a2020;\
+            --ring-bg: #333035;\
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);\
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);\
+            --border: #3a3538;\
+            --btn-hover: #3a2825;\
+            --task-done: #5a5550;\
+            --gradient: linear-gradient(135deg, #f0715c, #d95545);\
+            --timer-shadow: 0 0 70px rgba(240, 113, 92, 0.35);\
+            --mode-bg: #2a282c;\
+        \}\
+\
+        * \{\
+            margin: 0;\
+            padding: 0;\
+            box-sizing: border-box;\
+        \}\
+\
+        body \{\
+            font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;\
+            background: var(--bg);\
+            color: var(--text);\
+            min-height: 100vh;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+            transition: background 0.5s ease, color 0.5s ease;\
+            padding: 20px;\
+            background-image: radial-gradient(ellipse at 50% 30%, rgba(232, 93, 74, 0.04) 0%, transparent 70%),\
+                radial-gradient(ellipse at 80% 70%, rgba(180, 130, 100, 0.03) 0%, transparent 60%);\
+        \}\
+\
+        [data-theme="dark"] body \{\
+            background-image: radial-gradient(ellipse at 50% 30%, rgba(240, 113, 92, 0.06) 0%, transparent 70%),\
+                radial-gradient(ellipse at 80% 70%, rgba(180, 130, 100, 0.04) 0%, transparent 60%);\
+        \}\
+\
+        .app-container \{\
+            width: 100%;\
+            max-width: 520px;\
+            display: flex;\
+            flex-direction: column;\
+            gap: 24px;\
+        \}\
+\
+        /* \uc0\u39030 \u37096 \u26639  */\
+        .top-bar \{\
+            display: flex;\
+            align-items: center;\
+            justify-content: space-between;\
+            padding: 0 4px;\
+        \}\
+        .app-title \{\
+            font-size: 1.4rem;\
+            font-weight: 700;\
+            letter-spacing: -0.3px;\
+            color: var(--text);\
+            display: flex;\
+            align-items: center;\
+            gap: 8px;\
+        \}\
+        .app-title .icon \{\
+            font-size: 1.6rem;\
+        \}\
+        .theme-toggle \{\
+            width: 44px;\
+            height: 44px;\
+            border-radius: 50%;\
+            border: 2px solid var(--border);\
+            background: var(--card-bg);\
+            cursor: pointer;\
+            font-size: 1.3rem;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+            transition: all 0.3s ease;\
+            color: var(--text);\
+            box-shadow: var(--shadow);\
+        \}\
+        .theme-toggle:hover \{\
+            transform: scale(1.06);\
+            box-shadow: var(--shadow-lg);\
+            border-color: var(--accent);\
+        \}\
+\
+        /* \uc0\u20027 \u21345 \u29255  */\
+        .main-card \{\
+            background: var(--card-bg);\
+            border-radius: 28px;\
+            padding: 36px 28px 32px;\
+            box-shadow: var(--shadow-lg);\
+            display: flex;\
+            flex-direction: column;\
+            align-items: center;\
+            gap: 20px;\
+            transition: all 0.5s ease;\
+            border: 1px solid var(--border);\
+            position: relative;\
+            overflow: hidden;\
+        \}\
+        .main-card::before \{\
+            content: '';\
+            position: absolute;\
+            top: -80px;\
+            right: -80px;\
+            width: 200px;\
+            height: 200px;\
+            background: var(--accent);\
+            opacity: 0.03;\
+            border-radius: 50%;\
+            pointer-events: none;\
+            transition: opacity 0.5s ease;\
+        \}\
+\
+        /* \uc0\u27169 \u24335 \u20999 \u25442 \u26631 \u31614  */\
+        .mode-tabs \{\
+            display: flex;\
+            gap: 6px;\
+            background: var(--mode-bg);\
+            border-radius: 20px;\
+            padding: 5px;\
+        \}\
+        .mode-tab \{\
+            padding: 10px 18px;\
+            border-radius: 16px;\
+            border: none;\
+            cursor: pointer;\
+            font-size: 0.9rem;\
+            font-weight: 600;\
+            letter-spacing: 0.2px;\
+            background: transparent;\
+            color: var(--text-secondary);\
+            transition: all 0.3s ease;\
+            white-space: nowrap;\
+            font-family: inherit;\
+        \}\
+        .mode-tab.active \{\
+            background: var(--accent);\
+            color: #fff;\
+            box-shadow: 0 4px 14px rgba(232, 93, 74, 0.3);\
+            font-weight: 700;\
+        \}\
+        .mode-tab:hover:not(.active) \{\
+            color: var(--text);\
+            background: rgba(0, 0, 0, 0.04);\
+        \}\
+        [data-theme="dark"] .mode-tab:hover:not(.active) \{\
+            background: rgba(255, 255, 255, 0.06);\
+        \}\
+\
+        /* \uc0\u35745 \u26102 \u22120 \u29615  */\
+        .timer-ring-container \{\
+            position: relative;\
+            width: 240px;\
+            height: 240px;\
+            flex-shrink: 0;\
+        \}\
+        .timer-ring \{\
+            transform: rotate(-90deg);\
+            width: 240px;\
+            height: 240px;\
+        \}\
+        .ring-bg \{\
+            fill: none;\
+            stroke: var(--ring-bg);\
+            stroke-width: 10;\
+        \}\
+        .ring-progress \{\
+            fill: none;\
+            stroke: url(#ringGradient);\
+            stroke-width: 10;\
+            stroke-linecap: round;\
+            transition: stroke-dashoffset 0.4s linear;\
+        \}\
+        .timer-text \{\
+            position: absolute;\
+            top: 50%;\
+            left: 50%;\
+            transform: translate(-50%, -50%);\
+            font-size: 3.8rem;\
+            font-weight: 700;\
+            letter-spacing: -1px;\
+            color: var(--text);\
+            font-variant-numeric: tabular-nums;\
+            font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', 'Menlo', 'PingFang SC', monospace;\
+            transition: color 0.3s ease;\
+        \}\
+        .timer-text.break-mode \{\
+            color: #4a9e6e;\
+        \}\
+        [data-theme="dark"] .timer-text.break-mode \{\
+            color: #5dbe82;\
+        \}\
+        .timer-label \{\
+            position: absolute;\
+            top: 62%;\
+            left: 50%;\
+            transform: translate(-50%, -50%);\
+            font-size: 0.85rem;\
+            color: var(--text-secondary);\
+            letter-spacing: 1px;\
+            font-weight: 500;\
+            text-transform: uppercase;\
+            pointer-events: none;\
+        \}\
+\
+        /* \uc0\u25353 \u38062  */\
+        .btn-row \{\
+            display: flex;\
+            gap: 14px;\
+            align-items: center;\
+        \}\
+        .btn \{\
+            padding: 12px 26px;\
+            border-radius: 50px;\
+            border: none;\
+            cursor: pointer;\
+            font-size: 1rem;\
+            font-weight: 600;\
+            letter-spacing: 0.3px;\
+            transition: all 0.3s ease;\
+            font-family: inherit;\
+            display: flex;\
+            align-items: center;\
+            gap: 7px;\
+        \}\
+        .btn-primary \{\
+            background: var(--gradient);\
+            color: #fff;\
+            box-shadow: var(--timer-shadow);\
+            font-size: 1.05rem;\
+            padding: 14px 36px;\
+        \}\
+        .btn-primary:hover \{\
+            transform: translateY(-2px);\
+            box-shadow: 0 8px 30px rgba(232, 93, 74, 0.4);\
+            filter: brightness(1.05);\
+        \}\
+        .btn-primary:active \{\
+            transform: scale(0.96);\
+            transition: transform 0.1s ease;\
+        \}\
+        .btn-secondary \{\
+            background: var(--card-bg);\
+            color: var(--text);\
+            border: 2px solid var(--border);\
+            padding: 10px 20px;\
+        \}\
+        .btn-secondary:hover \{\
+            background: var(--btn-hover);\
+            border-color: var(--accent);\
+        \}\
+        .btn-icon \{\
+            width: 42px;\
+            height: 42px;\
+            border-radius: 50%;\
+            padding: 0;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+            font-size: 1.1rem;\
+        \}\
+\
+        /* \uc0\u35774 \u32622 \u21306  */\
+        .settings-row \{\
+            display: flex;\
+            gap: 10px;\
+            flex-wrap: wrap;\
+            justify-content: center;\
+            width: 100%;\
+        \}\
+        .setting-group \{\
+            display: flex;\
+            align-items: center;\
+            gap: 6px;\
+            background: var(--mode-bg);\
+            border-radius: 20px;\
+            padding: 6px 10px 6px 14px;\
+            font-size: 0.82rem;\
+            font-weight: 500;\
+            color: var(--text-secondary);\
+        \}\
+        .setting-group input \{\
+            width: 44px;\
+            border: 1px solid var(--border);\
+            border-radius: 12px;\
+            padding: 6px 4px;\
+            text-align: center;\
+            font-size: 0.85rem;\
+            font-weight: 600;\
+            background: var(--card-bg);\
+            color: var(--text);\
+            font-family: inherit;\
+            transition: all 0.3s ease;\
+        \}\
+        .setting-group input:focus \{\
+            outline: none;\
+            border-color: var(--accent);\
+            box-shadow: 0 0 0 3px var(--accent-soft);\
+        \}\
+\
+        /* \uc0\u32479 \u35745 \u21306  */\
+        .stats-card \{\
+            background: var(--card-bg);\
+            border-radius: 20px;\
+            padding: 20px 24px;\
+            box-shadow: var(--shadow);\
+            border: 1px solid var(--border);\
+            transition: all 0.5s ease;\
+        \}\
+        .stats-title \{\
+            font-size: 0.8rem;\
+            text-transform: uppercase;\
+            letter-spacing: 1.5px;\
+            color: var(--text-secondary);\
+            margin-bottom: 12px;\
+            font-weight: 600;\
+        \}\
+        .stats-row \{\
+            display: flex;\
+            gap: 16px;\
+            flex-wrap: wrap;\
+        \}\
+        .stat-item \{\
+            flex: 1;\
+            min-width: 60px;\
+            text-align: center;\
+            background: var(--mode-bg);\
+            border-radius: 14px;\
+            padding: 12px 10px;\
+            transition: all 0.3s ease;\
+        \}\
+        .stat-value \{\
+            font-size: 1.6rem;\
+            font-weight: 700;\
+            color: var(--accent);\
+            letter-spacing: -0.5px;\
+        \}\
+        .stat-label \{\
+            font-size: 0.72rem;\
+            color: var(--text-secondary);\
+            margin-top: 2px;\
+            letter-spacing: 0.3px;\
+        \}\
+\
+        /* \uc0\u20219 \u21153 \u21306  */\
+        .tasks-card \{\
+            background: var(--card-bg);\
+            border-radius: 20px;\
+            padding: 20px 24px;\
+            box-shadow: var(--shadow);\
+            border: 1px solid var(--border);\
+            transition: all 0.5s ease;\
+        \}\
+        .tasks-header \{\
+            display: flex;\
+            justify-content: space-between;\
+            align-items: center;\
+            margin-bottom: 12px;\
+        \}\
+        .tasks-title \{\
+            font-size: 0.8rem;\
+            text-transform: uppercase;\
+            letter-spacing: 1.5px;\
+            color: var(--text-secondary);\
+            font-weight: 600;\
+        \}\
+        .task-input-row \{\
+            display: flex;\
+            gap: 8px;\
+            margin-bottom: 12px;\
+        \}\
+        .task-input \{\
+            flex: 1;\
+            border: 2px solid var(--border);\
+            border-radius: 14px;\
+            padding: 10px 16px;\
+            font-size: 0.9rem;\
+            background: var(--mode-bg);\
+            color: var(--text);\
+            font-family: inherit;\
+            transition: all 0.3s ease;\
+        \}\
+        .task-input:focus \{\
+            outline: none;\
+            border-color: var(--accent);\
+            box-shadow: 0 0 0 3px var(--accent-soft);\
+        \}\
+        .task-add-btn \{\
+            border-radius: 14px;\
+            padding: 10px 16px;\
+            background: var(--accent);\
+            color: #fff;\
+            border: none;\
+            cursor: pointer;\
+            font-weight: 600;\
+            font-size: 0.9rem;\
+            transition: all 0.3s ease;\
+            font-family: inherit;\
+        \}\
+        .task-add-btn:hover \{\
+            filter: brightness(1.08);\
+            box-shadow: 0 4px 14px rgba(232, 93, 74, 0.3);\
+        \}\
+        .task-list \{\
+            list-style: none;\
+            display: flex;\
+            flex-direction: column;\
+            gap: 6px;\
+            max-height: 200px;\
+            overflow-y: auto;\
+            padding-right: 4px;\
+        \}\
+        .task-list::-webkit-scrollbar \{\
+            width: 4px;\
+        \}\
+        .task-list::-webkit-scrollbar-thumb \{\
+            background: var(--border);\
+            border-radius: 10px;\
+        \}\
+        .task-item \{\
+            display: flex;\
+            align-items: center;\
+            gap: 10px;\
+            padding: 10px 14px;\
+            background: var(--mode-bg);\
+            border-radius: 12px;\
+            transition: all 0.3s ease;\
+            font-size: 0.9rem;\
+            word-break: break-word;\
+        \}\
+        .task-item.done .task-text \{\
+            text-decoration: line-through;\
+            color: var(--task-done);\
+        \}\
+        .task-check \{\
+            width: 20px;\
+            height: 20px;\
+            border-radius: 50%;\
+            border: 2px solid var(--border);\
+            cursor: pointer;\
+            flex-shrink: 0;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+            transition: all 0.3s ease;\
+            font-size: 0.65rem;\
+            color: transparent;\
+            background: var(--card-bg);\
+        \}\
+        .task-item.done .task-check \{\
+            background: #4a9e6e;\
+            border-color: #4a9e6e;\
+            color: #fff;\
+        \}\
+        .task-text \{\
+            flex: 1;\
+            cursor: pointer;\
+            transition: color 0.3s ease;\
+        \}\
+        .task-delete \{\
+            background: none;\
+            border: none;\
+            cursor: pointer;\
+            color: var(--text-secondary);\
+            font-size: 0.8rem;\
+            padding: 4px 8px;\
+            border-radius: 8px;\
+            transition: all 0.3s ease;\
+            opacity: 0;\
+        \}\
+        .task-item:hover .task-delete \{\
+            opacity: 1;\
+        \}\
+        .task-delete:hover \{\
+            color: var(--accent);\
+            background: var(--accent-soft);\
+        \}\
+\
+        /* Toast */\
+        .toast \{\
+            position: fixed;\
+            top: 24px;\
+            left: 50%;\
+            transform: translateX(-50%) translateY(-120px);\
+            background: #3e3640;\
+            color: #fff;\
+            padding: 12px 24px;\
+            border-radius: 50px;\
+            font-weight: 600;\
+            font-size: 0.9rem;\
+            letter-spacing: 0.3px;\
+            z-index: 1000;\
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);\
+            pointer-events: none;\
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);\
+        \}\
+        .toast.show \{\
+            transform: translateX(-50%) translateY(0);\
+        \}\
+        [data-theme="dark"] .toast \{\
+            background: #f0e8e0;\
+            color: #3e3640;\
+        \}\
+\
+        /* \uc0\u21709 \u24212 \u24335  */\
+        @media (max-width: 480px) \{\
+            .app-container \{\
+                gap: 16px;\
+            \}\
+            .main-card \{\
+                padding: 24px 16px 20px;\
+                border-radius: 22px;\
+            \}\
+            .timer-ring-container \{\
+                width: 180px;\
+                height: 180px;\
+            \}\
+            .timer-ring \{\
+                width: 180px;\
+                height: 180px;\
+            \}\
+            .timer-text \{\
+                font-size: 3rem;\
+            \}\
+            .btn-primary \{\
+                padding: 12px 28px;\
+                font-size: 0.95rem;\
+            \}\
+            .mode-tab \{\
+                padding: 8px 14px;\
+                font-size: 0.8rem;\
+            \}\
+            .stats-row \{\
+                gap: 8px;\
+            \}\
+            .stat-item \{\
+                padding: 8px 6px;\
+            \}\
+            .stat-value \{\
+                font-size: 1.3rem;\
+            \}\
+        \}\
+    </style>\
+</head>\
+<body>\
+\
+    <div class="app-container">\
+        <!-- \uc0\u39030 \u37096  -->\
+        <div class="top-bar">\
+            <div class="app-title">\
+                <span class="icon">\uc0\u55356 \u57157 </span> \u30058 \u33540 \u26102 \u38047 \
+            </div>\
+            <button class="theme-toggle" id="themeToggle" aria-label="\uc0\u20999 \u25442 \u20027 \u39064 " title="\u20999 \u25442 \u26263 \u33394 /\u20142 \u33394 \u20027 \u39064 ">\
+                \uc0\u55356 \u57113 \
+            </button>\
+        </div>\
+\
+        <!-- \uc0\u20027 \u21345 \u29255  -->\
+        <div class="main-card" id="mainCard">\
+            <!-- \uc0\u27169 \u24335 \u26631 \u31614  -->\
+            <div class="mode-tabs">\
+                <button class="mode-tab active" data-mode="work">\uc0\u55356 \u57157  \u19987 \u27880 </button>\
+                <button class="mode-tab" data-mode="shortBreak">\uc0\u9749  \u30701 \u20241 \u24687 </button>\
+                <button class="mode-tab" data-mode="longBreak">\uc0\u55356 \u57151  \u38271 \u20241 \u24687 </button>\
+            </div>\
+\
+            <!-- \uc0\u35745 \u26102 \u22120  -->\
+            <div class="timer-ring-container">\
+                <svg class="timer-ring" viewBox="0 0 240 240">\
+                    <defs>\
+                        <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">\
+                            <stop offset="0%" stop-color="#e85d4a" />\
+                            <stop offset="100%" stop-color="#f28b78" />\
+                        </linearGradient>\
+                        <linearGradient id="ringGradientBreak" x1="0%" y1="0%" x2="100%" y2="100%">\
+                            <stop offset="0%" stop-color="#4a9e6e" />\
+                            <stop offset="100%" stop-color="#6dc58b" />\
+                        </linearGradient>\
+                    </defs>\
+                    <circle class="ring-bg" cx="120" cy="120" r="108" />\
+                    <circle class="ring-progress" id="ringProgress" cx="120" cy="120" r="108"\
+                    stroke-dasharray="678.584"\
+                    stroke-dashoffset="0" />\
+                </svg>\
+                <div class="timer-text" id="timerDisplay">25:00</div>\
+                <div class="timer-label" id="timerLabel">\uc0\u19987 \u27880 \u26102 \u38388 </div>\
+            </div>\
+\
+            <!-- \uc0\u25353 \u38062  -->\
+            <div class="btn-row">\
+                <button class="btn btn-secondary btn-icon" id="btnReset" title="\uc0\u37325 \u32622 ">\u8634 </button>\
+                <button class="btn btn-primary" id="btnStart">\
+                    \uc0\u9654  \u24320 \u22987 \u19987 \u27880 \
+                </button>\
+                <button class="btn btn-secondary btn-icon" id="btnSkip" title="\uc0\u36339 \u36807 ">\u9197 </button>\
+            </div>\
+\
+            <!-- \uc0\u26102 \u38271 \u35774 \u32622  -->\
+            <div class="settings-row">\
+                <div class="setting-group">\
+                    \uc0\u55356 \u57157  \u19987 \u27880  <input type="number" id="workMinutes" value="25" min="1" max="60"> \u20998 \u38047 \
+                </div>\
+                <div class="setting-group">\
+                    \uc0\u9749  \u30701 \u20241  <input type="number" id="shortBreakMinutes" value="5" min="1" max="30"> \u20998 \u38047 \
+                </div>\
+                <div class="setting-group">\
+                    \uc0\u55356 \u57151  \u38271 \u20241  <input type="number" id="longBreakMinutes" value="15" min="1" max="60"> \u20998 \u38047 \
+                </div>\
+            </div>\
+        </div>\
+\
+        <!-- \uc0\u32479 \u35745  -->\
+        <div class="stats-card">\
+            <div class="stats-title">\uc0\u55357 \u56522  \u20170 \u26085 \u32479 \u35745 </div>\
+            <div class="stats-row">\
+                <div class="stat-item">\
+                    <div class="stat-value" id="pomodorosDone">0</div>\
+                    <div class="stat-label">\uc0\u23436 \u25104 \u30058 \u33540 </div>\
+                </div>\
+                <div class="stat-item">\
+                    <div class="stat-value" id="totalFocusTime">0\uc0\u20998 \u38047 </div>\
+                    <div class="stat-label">\uc0\u24635 \u19987 \u27880 \u26102 \u38271 </div>\
+                </div>\
+                <div class="stat-item">\
+                    <div class="stat-value" id="streakCount">0</div>\
+                    <div class="stat-label">\uc0\u36830 \u32493 \u22825 \u25968 </div>\
+                </div>\
+                <div class="stat-item">\
+                    <div class="stat-value" id="sessionsToday">0</div>\
+                    <div class="stat-label">\uc0\u20170 \u26085 \u20250 \u35805 </div>\
+                </div>\
+            </div>\
+        </div>\
+\
+        <!-- \uc0\u20219 \u21153 \u21015 \u34920  -->\
+        <div class="tasks-card">\
+            <div class="tasks-header">\
+                <span class="tasks-title">\uc0\u55357 \u56541  \u24453 \u21150 \u20219 \u21153 </span>\
+                <span style="font-size:0.75rem;color:var(--text-secondary);" id="taskCount">0\uc0\u20010 \u24453 \u23436 \u25104 </span>\
+            </div>\
+            <div class="task-input-row">\
+                <input type="text" class="task-input" id="taskInput" placeholder="\uc0\u28155 \u21152 \u19968 \u20010 \u20219 \u21153 ..." maxlength="80">\
+                <button class="task-add-btn" id="btnAddTask">+ \uc0\u28155 \u21152 </button>\
+            </div>\
+            <ul class="task-list" id="taskList"></ul>\
+        </div>\
+    </div>\
+\
+    <!-- Toast -->\
+    <div class="toast" id="toast"></div>\
+\
+    <script>\
+        (function() \{\
+            // ============ DOM\uc0\u20803 \u32032  ============\
+            const timerDisplay = document.getElementById('timerDisplay');\
+            const timerLabel = document.getElementById('timerLabel');\
+            const ringProgress = document.getElementById('ringProgress');\
+            const btnStart = document.getElementById('btnStart');\
+            const btnReset = document.getElementById('btnReset');\
+            const btnSkip = document.getElementById('btnSkip');\
+            const btnAddTask = document.getElementById('btnAddTask');\
+            const taskInput = document.getElementById('taskInput');\
+            const taskList = document.getElementById('taskList');\
+            const taskCount = document.getElementById('taskCount');\
+            const toast = document.getElementById('toast');\
+            const themeToggle = document.getElementById('themeToggle');\
+            const modeTabs = document.querySelectorAll('.mode-tab');\
+            const workInput = document.getElementById('workMinutes');\
+            const shortBreakInput = document.getElementById('shortBreakMinutes');\
+            const longBreakInput = document.getElementById('longBreakMinutes');\
+            const pomodorosDoneEl = document.getElementById('pomodorosDone');\
+            const totalFocusTimeEl = document.getElementById('totalFocusTime');\
+            const streakCountEl = document.getElementById('streakCount');\
+            const sessionsTodayEl = document.getElementById('sessionsToday');\
+\
+            // ============ \uc0\u29366 \u24577  ============\
+            const CIRCUMFERENCE = 2 * Math.PI * 108; // ~678.584\
+            ringProgress.style.strokeDasharray = CIRCUMFERENCE;\
+            ringProgress.style.strokeDashoffset = '0';\
+\
+            let currentMode = 'work'; // 'work' | 'shortBreak' | 'longBreak'\
+            let timeLeft = 25 * 60; // \uc0\u31186 \
+            let totalSeconds = 25 * 60;\
+            let isRunning = false;\
+            let timerInterval = null;\
+            let pomodorosToday = 0;\
+            let totalFocusSeconds = 0;\
+            let sessionsTodayCount = 0;\
+            let streakDays = 0;\
+            let lastActiveDate = null;\
+\
+            // \uc0\u38899 \u39057 \u19978 \u19979 \u25991 \
+            let audioCtx = null;\
+\
+            // ============ \uc0\u21021 \u22987 \u21270  ============\
+            function init() \{\
+                loadFromStorage();\
+                updateDisplay();\
+                updateRing();\
+                updateStatsUI();\
+                renderTasks();\
+                updateTaskCount();\
+                applyThemeFromStorage();\
+                ringProgress.style.stroke = 'url(#ringGradient)';\
+            \}\
+\
+            function loadFromStorage() \{\
+                try \{\
+                    const saved = JSON.parse(localStorage.getItem('pomodoroAppData') || '\{\}');\
+                    pomodorosToday = saved.pomodorosToday || 0;\
+                    totalFocusSeconds = saved.totalFocusSeconds || 0;\
+                    sessionsTodayCount = saved.sessionsTodayCount || 0;\
+                    streakDays = saved.streakDays || 0;\
+                    lastActiveDate = saved.lastActiveDate || null;\
+                    workInput.value = saved.workMinutes || 25;\
+                    shortBreakInput.value = saved.shortBreakMinutes || 5;\
+                    longBreakInput.value = saved.longBreakMinutes || 15;\
+                    // \uc0\u26816 \u26597 \u26085 \u26399 \
+                    const today = getDateString();\
+                    if (lastActiveDate && lastActiveDate !== today) \{\
+                        const yesterday = getDateString(new Date(Date.now() - 86400000));\
+                        if (lastActiveDate === yesterday) \{\
+                            streakDays += 1;\
+                        \} else if (lastActiveDate !== today) \{\
+                            streakDays = 0;\
+                        \}\
+                        pomodorosToday = 0;\
+                        totalFocusSeconds = 0;\
+                        sessionsTodayCount = 0;\
+                        lastActiveDate = today;\
+                    \} else if (!lastActiveDate) \{\
+                        lastActiveDate = today;\
+                        streakDays = 1;\
+                    \}\
+                    timeLeft = (parseInt(workInput.value) || 25) * 60;\
+                    totalSeconds = timeLeft;\
+                    currentMode = 'work';\
+                    saveToStorage();\
+                \} catch (e) \{\
+                    console.log('\uc0\u21152 \u36733 \u25968 \u25454 \u22833 \u36133 \u65292 \u20351 \u29992 \u40664 \u35748 \u35774 \u32622 ');\
+                    timeLeft = 25 * 60;\
+                    totalSeconds = timeLeft;\
+                \}\
+            \}\
+\
+            function saveToStorage() \{\
+                try \{\
+                    const data = \{\
+                        pomodorosToday,\
+                        totalFocusSeconds,\
+                        sessionsTodayCount,\
+                        streakDays,\
+                        lastActiveDate: lastActiveDate || getDateString(),\
+                        workMinutes: parseInt(workInput.value) || 25,\
+                        shortBreakMinutes: parseInt(shortBreakInput.value) || 5,\
+                        longBreakMinutes: parseInt(longBreakInput.value) || 15,\
+                        tasks: getTasksData(),\
+                    \};\
+                    localStorage.setItem('pomodoroAppData', JSON.stringify(data));\
+                \} catch (e) \{\
+                    console.log('\uc0\u20445 \u23384 \u22833 \u36133 ');\
+                \}\
+            \}\
+\
+            function getDateString(date = new Date()) \{\
+                return date.toISOString().split('T')[0];\
+            \}\
+\
+            // ============ \uc0\u20219 \u21153 \u31649 \u29702  ============\
+            function getTasksData() \{\
+                const items = taskList.querySelectorAll('.task-item');\
+                const tasks = [];\
+                items.forEach(item => \{\
+                    tasks.push(\{\
+                        text: item.querySelector('.task-text').textContent,\
+                        done: item.classList.contains('done'),\
+                    \});\
+                \});\
+                return tasks;\
+            \}\
+\
+            function renderTasks() \{\
+                try \{\
+                    const saved = JSON.parse(localStorage.getItem('pomodoroAppData') || '\{\}');\
+                    const tasks = saved.tasks || [];\
+                    taskList.innerHTML = '';\
+                    tasks.forEach((task, index) => \{\
+                        const li = createTaskElement(task.text, task.done);\
+                        taskList.appendChild(li);\
+                    \});\
+                \} catch (e) \{\
+                    taskList.innerHTML = '';\
+                \}\
+            \}\
+\
+            function createTaskElement(text, done = false) \{\
+                const li = document.createElement('li');\
+                li.className = 'task-item' + (done ? ' done' : '');\
+                li.innerHTML = `\
+                    <span class="task-check">\uc0\u10003 </span>\
+                    <span class="task-text">$\{escapeHtml(text)\}</span>\
+                    <button class="task-delete" title="\uc0\u21024 \u38500 ">\u10005 </button>\
+                `;\
+                // \uc0\u28857 \u20987 \u21246 \u36873 \
+                li.querySelector('.task-check').addEventListener('click', () => toggleTask(li));\
+                li.querySelector('.task-text').addEventListener('click', () => toggleTask(li));\
+                li.querySelector('.task-delete').addEventListener('click', (e) => \{\
+                    e.stopPropagation();\
+                    li.style.transform = 'translateX(40px)';\
+                    li.style.opacity = '0';\
+                    li.style.transition = 'all 0.3s ease';\
+                    setTimeout(() => \{\
+                        li.remove();\
+                        updateTaskCount();\
+                        saveToStorage();\
+                    \}, 300);\
+                \});\
+                return li;\
+            \}\
+\
+            function toggleTask(li) \{\
+                li.classList.toggle('done');\
+                updateTaskCount();\
+                saveToStorage();\
+                if (li.classList.contains('done')) \{\
+                    playTickSound();\
+                \}\
+            \}\
+\
+            function updateTaskCount() \{\
+                const total = taskList.querySelectorAll('.task-item').length;\
+                const done = taskList.querySelectorAll('.task-item.done').length;\
+                const pending = total - done;\
+                taskCount.textContent = pending + '\uc0\u20010 \u24453 \u23436 \u25104 ';\
+            \}\
+\
+            function escapeHtml(str) \{\
+                const div = document.createElement('div');\
+                div.textContent = str;\
+                return div.innerHTML;\
+            \}\
+\
+            // ============ \uc0\u35745 \u26102 \u22120  ============\
+            function updateDisplay() \{\
+                const mins = Math.floor(timeLeft / 60);\
+                const secs = timeLeft % 60;\
+                timerDisplay.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');\
+\
+                if (currentMode === 'work') \{\
+                    timerDisplay.classList.remove('break-mode');\
+                    timerLabel.textContent = '\uc0\u19987 \u27880 \u26102 \u38388 ';\
+                    ringProgress.style.stroke = 'url(#ringGradient)';\
+                \} else \{\
+                    timerDisplay.classList.add('break-mode');\
+                    timerLabel.textContent = currentMode === 'shortBreak' ? '\uc0\u30701 \u20241 \u24687 ' : '\u38271 \u20241 \u24687 ';\
+                    ringProgress.style.stroke = 'url(#ringGradientBreak)';\
+                \}\
+            \}\
+\
+            function updateRing() \{\
+                const offset = CIRCUMFERENCE * (1 - timeLeft / totalSeconds);\
+                ringProgress.style.strokeDashoffset = offset;\
+            \}\
+\
+            function setMode(mode) \{\
+                if (isRunning) \{\
+                    pauseTimer();\
+                \}\
+                currentMode = mode;\
+                modeTabs.forEach(tab => tab.classList.remove('active'));\
+                const activeTab = document.querySelector(`.mode-tab[data-mode="$\{mode\}"]`);\
+                if (activeTab) activeTab.classList.add('active');\
+\
+                switch (mode) \{\
+                    case 'work':\
+                        timeLeft = (parseInt(workInput.value) || 25) * 60;\
+                        break;\
+                    case 'shortBreak':\
+                        timeLeft = (parseInt(shortBreakInput.value) || 5) * 60;\
+                        break;\
+                    case 'longBreak':\
+                        timeLeft = (parseInt(longBreakInput.value) || 15) * 60;\
+                        break;\
+                \}\
+                totalSeconds = timeLeft;\
+                updateDisplay();\
+                updateRing();\
+                updateStartButtonText();\
+            \}\
+\
+            function updateStartButtonText() \{\
+                if (isRunning) \{\
+                    btnStart.innerHTML = '\uc0\u9208  \u26242 \u20572 ';\
+                \} else \{\
+                    const prefix = currentMode === 'work' ? '\uc0\u9654  \u24320 \u22987 \u19987 \u27880 ' :\
+                        currentMode === 'shortBreak' ? '\uc0\u9654  \u24320 \u22987 \u20241 \u24687 ' : '\u9654  \u24320 \u22987 \u38271 \u20241 ';\
+                    btnStart.innerHTML = prefix;\
+                \}\
+            \}\
+\
+            function startTimer() \{\
+                if (isRunning) return;\
+                isRunning = true;\
+                updateStartButtonText();\
+                timerInterval = setInterval(() => \{\
+                    if (timeLeft <= 0) \{\
+                        finishTimer();\
+                        return;\
+                    \}\
+                    timeLeft--;\
+                    updateDisplay();\
+                    updateRing();\
+                \}, 1000);\
+            \}\
+\
+            function pauseTimer() \{\
+                isRunning = false;\
+                clearInterval(timerInterval);\
+                timerInterval = null;\
+                updateStartButtonText();\
+            \}\
+\
+            function resetTimer() \{\
+                pauseTimer();\
+                switch (currentMode) \{\
+                    case 'work':\
+                        timeLeft = (parseInt(workInput.value) || 25) * 60;\
+                        break;\
+                    case 'shortBreak':\
+                        timeLeft = (parseInt(shortBreakInput.value) || 5) * 60;\
+                        break;\
+                    case 'longBreak':\
+                        timeLeft = (parseInt(longBreakInput.value) || 15) * 60;\
+                        break;\
+                \}\
+                totalSeconds = timeLeft;\
+                updateDisplay();\
+                updateRing();\
+            \}\
+\
+            function skipTimer() \{\
+                pauseTimer();\
+                finishTimer(true);\
+            \}\
+\
+            function finishTimer(skipped = false) \{\
+                pauseTimer();\
+                playAlarmSound();\
+\
+                if (currentMode === 'work' && !skipped) \{\
+                    pomodorosToday++;\
+                    totalFocusSeconds += totalSeconds;\
+                    sessionsTodayCount++;\
+                    lastActiveDate = getDateString();\
+                    if (streakDays === 0) streakDays = 1;\
+                \}\
+\
+                updateStatsUI();\
+                saveToStorage();\
+                showToast(\
+                    skipped ?\
+                    (currentMode === 'work' ? '\uc0\u9197  \u24050 \u36339 \u36807 \u30058 \u33540 \u38047 ' : '\u9197  \u24050 \u36339 \u36807 \u20241 \u24687 ') :\
+                    (currentMode === 'work' ? '\uc0\u55356 \u57225  \u30058 \u33540 \u23436 \u25104 \u65281 \u20241 \u24687 \u19968 \u19979 \u21543 ~' : '\u9749  \u20241 \u24687 \u32467 \u26463 \u65292 \u32487 \u32493 \u21152 \u27833 \u65281 ')\
+                );\
+\
+                // \uc0\u33258 \u21160 \u20999 \u25442 \u27169 \u24335 \
+                if (currentMode === 'work') \{\
+                    // \uc0\u27599 4\u20010 \u30058 \u33540 \u21518 \u38271 \u20241 \u24687 \
+                    if (pomodorosToday > 0 && pomodorosToday % 4 === 0) \{\
+                        setMode('longBreak');\
+                    \} else \{\
+                        setMode('shortBreak');\
+                    \}\
+                \} else \{\
+                    setMode('work');\
+                \}\
+                // \uc0\u33258 \u21160 \u24320 \u22987 \u26032 \u38454 \u27573 \
+                setTimeout(() => \{\
+                    startTimer();\
+                    showToast(currentMode === 'work' ? '\uc0\u55356 \u57157  \u26032 \u30058 \u33540 \u24320 \u22987 \u65281 ' : '\u9749  \u20241 \u24687 \u26102 \u38388 ~');\
+                \}, 800);\
+            \}\
+\
+            function updateStatsUI() \{\
+                pomodorosDoneEl.textContent = pomodorosToday;\
+                const focusMin = Math.floor(totalFocusSeconds / 60);\
+                totalFocusTimeEl.textContent = focusMin + '\uc0\u20998 \u38047 ';\
+                streakCountEl.textContent = streakDays;\
+                sessionsTodayEl.textContent = sessionsTodayCount;\
+            \}\
+\
+            // ============ \uc0\u38899 \u25928  ============\
+            function initAudio() \{\
+                if (!audioCtx) \{\
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();\
+                \}\
+            \}\
+\
+            function playAlarmSound() \{\
+                initAudio();\
+                if (!audioCtx) return;\
+                // \uc0\u25773 \u25918 \u19968 \u20010 \u24742 \u32819 \u30340 \u25552 \u31034 \u38899 \u24207 \u21015 \
+                const notes = [523, 659, 784, 1047]; // C5 E5 G5 C6\
+                notes.forEach((freq, i) => \{\
+                    const osc = audioCtx.createOscillator();\
+                    const gain = audioCtx.createGain();\
+                    osc.type = 'sine';\
+                    osc.frequency.value = freq;\
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime + i * 0.18);\
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.18 + 0.35);\
+                    osc.connect(gain);\
+                    gain.connect(audioCtx.destination);\
+                    osc.start(audioCtx.currentTime + i * 0.18);\
+                    osc.stop(audioCtx.currentTime + i * 0.18 + 0.35);\
+                \});\
+            \}\
+\
+            function playTickSound() \{\
+                initAudio();\
+                if (!audioCtx) return;\
+                const osc = audioCtx.createOscillator();\
+                const gain = audioCtx.createGain();\
+                osc.type = 'sine';\
+                osc.frequency.value = 880;\
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);\
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);\
+                osc.connect(gain);\
+                gain.connect(audioCtx.destination);\
+                osc.start(audioCtx.currentTime);\
+                osc.stop(audioCtx.currentTime + 0.12);\
+            \}\
+\
+            // ============ Toast ============\
+            let toastTimeout;\
+\
+            function showToast(message) \{\
+                clearTimeout(toastTimeout);\
+                toast.textContent = message;\
+                toast.classList.add('show');\
+                toastTimeout = setTimeout(() => \{\
+                    toast.classList.remove('show');\
+                \}, 2200);\
+            \}\
+\
+            // ============ \uc0\u20027 \u39064  ============\
+            function applyThemeFromStorage() \{\
+                const savedTheme = localStorage.getItem('pomodoroTheme') || 'light';\
+                document.documentElement.setAttribute('data-theme', savedTheme);\
+                themeToggle.textContent = savedTheme === 'dark' ? '\uc0\u9728 \u65039 ' : '\u55356 \u57113 ';\
+            \}\
+\
+            function toggleTheme() \{\
+                const current = document.documentElement.getAttribute('data-theme') || 'light';\
+                const next = current === 'dark' ? 'light' : 'dark';\
+                document.documentElement.setAttribute('data-theme', next);\
+                localStorage.setItem('pomodoroTheme', next);\
+                themeToggle.textContent = next === 'dark' ? '\uc0\u9728 \u65039 ' : '\u55356 \u57113 ';\
+                playTickSound();\
+            \}\
+\
+            // ============ \uc0\u20107 \u20214 \u30417 \u21548  ============\
+            btnStart.addEventListener('click', () => \{\
+                initAudio();\
+                if (isRunning) \{\
+                    pauseTimer();\
+                \} else \{\
+                    startTimer();\
+                \}\
+            \});\
+\
+            btnReset.addEventListener('click', () => \{\
+                resetTimer();\
+                showToast('\uc0\u55357 \u56580  \u24050 \u37325 \u32622 \u35745 \u26102 \u22120 ');\
+            \});\
+\
+            btnSkip.addEventListener('click', () => \{\
+                skipTimer();\
+            \});\
+\
+            modeTabs.forEach(tab => \{\
+                tab.addEventListener('click', () => \{\
+                    setMode(tab.dataset.mode);\
+                \});\
+            \});\
+\
+            [workInput, shortBreakInput, longBreakInput].forEach(input => \{\
+                input.addEventListener('change', () => \{\
+                    let val = parseInt(input.value);\
+                    if (isNaN(val) || val < 1) val = 1;\
+                    if (val > (input === longBreakInput ? 60 : input === workInput ? 60 : 30))\
+                        val = input === longBreakInput ? 60 : input === workInput ? 60 : 30;\
+                    input.value = val;\
+                    if (!isRunning) \{\
+                        resetTimer();\
+                    \}\
+                    saveToStorage();\
+                \});\
+            \});\
+\
+            btnAddTask.addEventListener('click', () => \{\
+                const text = taskInput.value.trim();\
+                if (!text) \{\
+                    showToast('\uc0\u35831 \u36755 \u20837 \u20219 \u21153 \u20869 \u23481 ~');\
+                    return;\
+                \}\
+                const li = createTaskElement(text);\
+                taskList.appendChild(li);\
+                taskInput.value = '';\
+                updateTaskCount();\
+                saveToStorage();\
+                playTickSound();\
+                // \uc0\u28378 \u21160 \u21040 \u24213 \u37096 \
+                taskList.scrollTop = taskList.scrollHeight;\
+            \});\
+\
+            taskInput.addEventListener('keydown', (e) => \{\
+                if (e.key === 'Enter') \{\
+                    btnAddTask.click();\
+                \}\
+            \});\
+\
+            themeToggle.addEventListener('click', toggleTheme);\
+\
+            // \uc0\u31354 \u26684 \u38190 \u24555 \u25463 \u26242 \u20572 /\u24320 \u22987 \
+            document.addEventListener('keydown', (e) => \{\
+                if (e.code === 'Space' && e.target === document.body) \{\
+                    e.preventDefault();\
+                    initAudio();\
+                    if (isRunning) \{\
+                        pauseTimer();\
+                    \} else \{\
+                        startTimer();\
+                    \}\
+                \}\
+                if (e.code === 'KeyR' && e.ctrlKey && e.target === document.body) \{\
+                    e.preventDefault();\
+                    resetTimer();\
+                    showToast('\uc0\u55357 \u56580  \u24050 \u37325 \u32622 ');\
+                \}\
+            \});\
+\
+            // \uc0\u39029 \u38754 \u20851 \u38381 \u21069 \u20445 \u23384 \
+            window.addEventListener('beforeunload', () => \{\
+                saveToStorage();\
+            \});\
+\
+            // ============ \uc0\u21551 \u21160  ============\
+            init();\
+            updateStartButtonText();\
+            console.log('\uc0\u55356 \u57157  \u30058 \u33540 \u26102 \u38047 \u24050 \u23601 \u32490 \u65281 ');\
+            console.log('   \uc0\u9000  \u24555 \u25463 \u38190 \u65306 \u31354 \u26684  = \u24320 \u22987 /\u26242 \u20572  | Ctrl+R = \u37325 \u32622 ');\
+            console.log('   \uc0\u55356 \u57256  \u28857 \u20987 \u21491 \u19978 \u35282 \u20999 \u25442 \u26263 \u33394 /\u20142 \u33394 \u20027 \u39064 ');\
+        \})();\
+    </script>\
+</body>\
+</html>}
